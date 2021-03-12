@@ -13,6 +13,12 @@ public static class LegoMeasurements
         public const double LDU_TO_METER = 2500;
     }
 
+    public static class RATIO
+    {
+        public const double STUD_HEIGHT_TO_TOTAL_HEIGHT = LDU.STUD_HEIGHT / LDU.BRICK_HEIGHT_TOTAL;
+        public const double BRICK_HEIGHT_NO_STUD_TO_TOTAL_HEIGHT = LDU.BRICK_HEIGHT_NO_STUD / LDU.BRICK_HEIGHT_TOTAL;
+    }
+
     // Measurements
     public static class METER
     {
@@ -35,7 +41,8 @@ public static class LegoMeasurements
         /**************************/
         /* 1x1 Brick Measurements */
         /**************************/
-        public const double BRICK_HEIGHT = 0.0096; // Y Size
+        public const double BRICK_HEIGHT_NO_STUD = 0.0096; // Y Size
+        public const double BRICK_HEIGHT_TOTAL = BRICK_HEIGHT_NO_STUD + STUD_HEIGHT;
 
         /**************************/
         /* 1x1 Plate Measurements */
@@ -63,7 +70,9 @@ public static class LegoMeasurements
         /**************************/
         /* 1x1 Brick Measurements */
         /**************************/
-        public const double BRICK_HEIGHT = 9.6; // Y Size
+        public const double BRICK_HEIGHT_NO_STUD = 9.6; // Y Size
+        public const double BRICK_HEIGHT_TOTAL = BRICK_HEIGHT_NO_STUD + STUD_HEIGHT;
+
 
         /**************************/
         /* 1x1 Plate Measurements */
@@ -96,7 +105,9 @@ public static class LegoMeasurements
         /**************************/
         /* 1x1 Brick Measurements */
         /**************************/
-        public const double BRICK_HEIGHT = 24; // Y Size
+        public const double BRICK_HEIGHT_NO_STUD = 24; // Y Size
+        public const double BRICK_HEIGHT_TOTAL = BRICK_HEIGHT_NO_STUD + STUD_HEIGHT;
+
 
         /**************************/
         /* 1x1 Plate Measurements */
