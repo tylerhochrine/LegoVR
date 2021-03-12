@@ -21060,7 +21060,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3920
+  m_Name: pb_Mesh-11080
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21353,6 +21353,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: LegoBrick[1x1](Br.Yellow) (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7334576352241564148, guid: 9ef56cdeb4351e347aee3a623a0e522e,
+        type: 3}
+      propertyPath: previewObjectPrefab
+      value: 
+      objectReference: {fileID: 4466239326838089429, guid: 4f4dc0ac0a380e44991f2ca2c05d4633,
+        type: 3}
     - target: {fileID: 7334576352241564149, guid: 9ef56cdeb4351e347aee3a623a0e522e,
         type: 3}
       propertyPath: m_RootOrder
@@ -21416,7 +21422,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2778
+  m_Name: pb_Mesh-9940
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21682,6 +21688,12 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1083561685}
+    - target: {fileID: 3269262884282290568, guid: 7a8122fa1e09ab34ba94cf6585c78e1b,
+        type: 3}
+      propertyPath: previewObjectPrefab
+      value: 
+      objectReference: {fileID: 8280837415188863170, guid: 288fb4e2268cbc04ba102b8b7f093b30,
+        type: 3}
     - target: {fileID: 3269262884282290569, guid: 7a8122fa1e09ab34ba94cf6585c78e1b,
         type: 3}
       propertyPath: m_Name
