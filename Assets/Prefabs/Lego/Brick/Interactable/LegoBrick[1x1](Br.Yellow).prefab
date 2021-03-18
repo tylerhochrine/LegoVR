@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7334576352241564144}
   - component: {fileID: 7334576352241564145}
   - component: {fileID: 7334576352241564148}
+  - component: {fileID: 1428018601312836404}
   m_Layer: 14
   m_Name: LegoBrick[1x1](Br.Yellow)
   m_TagString: Untagged
@@ -186,7 +187,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a82bb1352f88a46b8f3d6400ee53b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  previewObjectPrefab: {fileID: 7334576352241564146}
   maxSnappableDistance: 1
+  validLegoLayers:
+  - Lego
+  studs: 
+  studReceptacles: 
+--- !u!114 &1428018601312836404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7334576352241564146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae1eada2c35134d4cab11421cec700a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  block: {fileID: 7334576352241564146}
 --- !u!1 &7334576352392053814
 GameObject:
   m_ObjectHideFlags: 0
