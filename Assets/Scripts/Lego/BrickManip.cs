@@ -10,12 +10,21 @@ public class BrickManip : MonoBehaviour
     public GameObject prefab;
     GameObject cloneBrick = null;
 
-    public void addBrick()
+    public void addBrick(Material material)
     {
         //GameObject player = GameObject.FindWithTag("Player");
         //Vector3 spawnPosition = player.transform.position;
         Vector3 spawnPosition = new Vector3(0, 1, 0);
         cloneBrick = Instantiate(prefab, spawnPosition, Quaternion.identity);
+        cloneBrick.GetComponentInChildren<Renderer>().sharedMaterial = material;
+    }
+
+    public void changeColor(Material material)
+    {   
+        if (cloneBrick != null) { 
+            InteractableFacade interactable = cloneBrick.GetComponent<InteractableFacade>();
+            interactable.GetComponentInChildren<Renderer>().sharedMaterial = material;
+        }
     }
 
     public void removeBrick()
