@@ -8,18 +8,20 @@ public class AddBrickCommand : ICommand
     Material material;
     GameObject brick;
     GameObject brickPrefab;
+    GameObject brickMesh;
 
-    public AddBrickCommand(Vector3 position, Material material, GameObject brick, GameObject brickPrefab)
+    public AddBrickCommand(Vector3 position, Material material, GameObject brick, GameObject brickPrefab, GameObject brickMesh)
     {
         this.position = position;
         this.material = material;
         this.brick = brick;
         this.brickPrefab = brickPrefab;
+        this.brickMesh = brickMesh;
     }
 
     public void Execute()
     {
-        brick = BrickManipulator.AddBrick(position, material, brickPrefab);
+        brick = BrickManipulator.AddBrick(position, material, brickPrefab, brickMesh);
     }
 
     public void Undo()

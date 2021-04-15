@@ -45,8 +45,9 @@ GameObject:
   - component: {fileID: 9062282352874892621}
   - component: {fileID: 8422070345853211071}
   - component: {fileID: 7296734311834677394}
+  - component: {fileID: 3033271632831707459}
   m_Layer: 0
-  m_Name: Lego [1x1 Brick]
+  m_Name: '[1x1 Brick] Lego'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,6 +129,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   previewObjectTemplate: {fileID: 1761421531451480660}
+--- !u!114 &3033271632831707459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2201700518842889159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a39005532c13e4998bbb71ca20f6a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brickPrefab: {fileID: 2201700518842889159}
 --- !u!1001 &1227834138548409294
 PrefabInstance:
   m_ObjectHideFlags: 0

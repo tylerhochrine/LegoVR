@@ -8,9 +8,12 @@ public static class BrickManipulator
 {
     static List<GameObject> bricks;
 
-    public static GameObject AddBrick(Vector3 position, Material material, GameObject brick)
+    public static GameObject AddBrick(Vector3 position, Material material, GameObject brick, GameObject brickMesh)
     {
         GameObject newBrick = GameObject.Instantiate(brick, position, Quaternion.identity);
+        GameObject iBrickMesh = GameObject.Instantiate(brickMesh);
+        iBrickMesh.transform.parent = newBrick.transform.Find("MeshContainer");
+        iBrickMesh.transform.localPosition = Vector3.zero;
         newBrick.GetComponentInChildren<Renderer>().sharedMaterial = material;
         if(bricks == null)
         {
