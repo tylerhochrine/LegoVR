@@ -61,7 +61,7 @@ public class LegoOld : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        connectionManager = new ConnectionManager(this.gameObject);
+        connectionManager = new ConnectionManager();
         interactableFacade = GetComponent<InteractableFacade>();
         legoRigidbody = GetComponent<Rigidbody>();
         legoRenderer = GetComponentInChildren<Renderer>();
@@ -156,7 +156,9 @@ public class LegoOld : MonoBehaviour
     /// FIXME: Take into account size and rotation of lego
     Vector3 getSnapToPosition()
     {
-        Vector3 offset = snapTargetObject.transform.up * snapTargetRenderer.bounds.size.y;
+        Collider coll = GetComponentInChildren<BoxCollider>();
+        Vector3 offset = snapTargetObject.transform.up * (float)(coll.bounds.size.y * LegoMeasurements.RATIO.BRICK_HEIGHT_NO_STUD_TO_TOTAL_HEIGHT);
+        // Vector3 offset = snapTargetObject.transform.up * 0.28f;
         return snapTargetObject.transform.position + offset;
     }
 
