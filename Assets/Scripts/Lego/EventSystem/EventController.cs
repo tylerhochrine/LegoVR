@@ -29,8 +29,6 @@ public class EventController
 
     public void OnEvent(string eventName)
     {
-        if (eventName == "onPotentialConnectionFound") Debug.Log("Potential Connection Found");
-
         if (eventSubscribers.ContainsKey(eventName))
             foreach (Action callback in eventSubscribers[eventName])
             {

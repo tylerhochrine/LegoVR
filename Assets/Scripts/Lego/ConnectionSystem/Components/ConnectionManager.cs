@@ -79,6 +79,7 @@ public class ConnectionManager : MonoBehaviour
         if (connector.CanConnectTo(other))
         {
             if (!simulate) connector.SetConnectionData(connectionData);
+
             return true;
         }
         else return false;

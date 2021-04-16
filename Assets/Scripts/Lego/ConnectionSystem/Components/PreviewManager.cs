@@ -56,9 +56,10 @@ public class PreviewManager : MonoBehaviour
 
     public void DisplayPreviewObject()
     {
-        this.previewObject.transform.position = target.GetConnectionPosition(sender);
-        this.previewObject.transform.rotation = target.GetConnectionRotation(sender);
-        // this.previewObject.transform.RotateAround(target.transform.position, target.transform.up, target.GetConnectionYRotationDifference(sender));
+        // this.previewObject.transform.rotation = target.GetConnectionRotation(sender);
+        // this.previewObject.transform.position = target.GetConnectionPosition(sender);
+        target.SetConnectionTransform(sender.transform, previewObject.transform);
+
         this.previewObject.SetActive(true);
     }
 

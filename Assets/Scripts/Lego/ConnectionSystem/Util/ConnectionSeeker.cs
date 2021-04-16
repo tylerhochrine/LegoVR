@@ -19,7 +19,7 @@ public static class ConnectionSeeker
 
             if (collision)
             {
-                if (current.CanConnectTo(hit.collider.gameObject.tag))
+                if (current.CanConnectTo(hit.collider.gameObject.tag) && !sortedConnectionRequests.ContainsKey(hit.distance))
                     sortedConnectionRequests.Add(hit.distance, new ConnectionRequest(current, hit.collider.gameObject.GetComponent<LegoConnector>()));
                 
             }
