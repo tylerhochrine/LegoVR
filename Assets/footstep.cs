@@ -10,7 +10,12 @@ public class footstep : MonoBehaviour
  
     void Start()
     {
-        foot = gameObject.GetComponent<AudioSource>();
+      
+    }
+
+    void Awake () {
+
+        foot = GetComponent<AudioSource>();
     }
  
     void Update()
@@ -20,5 +25,22 @@ public class footstep : MonoBehaviour
  
         if (IsMoving && !foot.isPlaying) foot.Play(); // if player is moving and audiosource is not playing play it
         if (!IsMoving) foot.Stop(); // if player is not moving and audiosource is playing stop it
+
     }
-}
+
+    void OnCollisionEnter(Collision collision)
+    {
+        //foot = gameObject.GetComponent<AudioSource>();
+        foot.Play();
+    }
+} 
+
+     /**
+    void mus() {
+          if(trigger.GetComponent.<Collider>().tag=="floor")
+          {
+              foot.play();
+        
+          }
+    }
+    **/
