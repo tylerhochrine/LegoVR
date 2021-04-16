@@ -82,14 +82,21 @@ public class LegoConnector : MonoBehaviour
 
     public Vector3 GetConnectionPosition(LegoConnector incoming)
     {
-        switch (this.type)
+        switch (type)
         {
             case ConnectorType.STUD:
-                Debug.Log(this.transform.position);
-                Debug.Log(incoming.transform.position);
-                return this.transform.position - (this.transform.rotation * new Vector3(incoming.transform.localPosition.x, 0, incoming.transform.localPosition.z));
+                // Vector3 offset = (incoming.transform.rotation * new Vector3(incoming.transform.parent.transform.localPosition.x, 0, incoming.transform.parent.transform.localPosition.z));
+                Vector3 result = transform.position;
+                // Vector3 offset = incoming.transform.rotation * incoming.transform.parent.transform.localPosition;
+                // Vector3 offset = Quaternion.Euler(0, incoming.transform.rotation.y, 0) * incoming.transform.parent.transform.localPosition;// new Vector3(incoming.transform.parent.transform.localPosition.x, 0, incoming.transform.parent.transform.localPosition.z);
+                Vector3 offset = incoming.transform.rotation * incoming.transform.parent.transform.localPosition;
+                result -= offset;
+                // result = incoming.transform.rotation * result;
+
+                return result;
             case ConnectorType.STUD_RECEPTACLE:
-                return this.transform.position - incoming.transform.localPosition;  // - (this.transform.rotation * incoming.transform.localPosition);
+                return Vector3.zero;
+                // return this.transform.position - this.transform.localPosition;  // - (this.transform.rotation * incoming.transform.localPosition);
             default:
                 return Vector3.zero;
         }
@@ -97,12 +104,28 @@ public class LegoConnector : MonoBehaviour
 
     public Quaternion GetConnectionRotation(LegoConnector incoming)
     {
-        return Quaternion.Euler(this.transform.eulerAngles.x, incoming.transform.rotation.eulerAngles.y, this.transform.rotation.z);
+        float yRotationOffset = ((transform.rotation.eulerAngles.y - incoming.transform.rotation.eulerAngles.y) % 90);
+        yRotationOffset = (yRotationOffset < 45 ? yRotationOffset : yRotationOffset - 90);
+        return Quaternion.Euler(transform.eulerAngles.x, incoming.transform.rotation.eulerAngles.y + yRotationOffset, transform.eulerAngles.z);
     }
 
-    public float GetConnectionYRotationDifference(LegoConnector incoming)
+    private float GetConnectionYRotation(Transform referenceTransform)
     {
-        float yRotationDifference = ((transform.rotation.eulerAngles.y - incoming.transform.rotation.eulerAngles.y) % 90);
-        return yRotationDifference < 45 ? yRotationDifference : yRotationDifference - 90;
+        float yRotationOffset = ((transform.rotation.eulerAngles.y - referenceTransform.rotation.eulerAngles.y) % 90);
+        return referenceTransform.rotation.eulerAngles.y + ( (  (0 < yRotationOffset && yRotationOffset < 45) ? yRotationOffset : ((0 < yRotationOffset) ? (yRotationOffset - 90) : (90 +  yRotationOffset))  ) );
+    }
+
+    public void SetConnectionTransform(Transform reference, Transform target)
+    {
+        switch (type)
+        {
+            case ConnectorType.STUD:
+                target.position = transform.position;
+                target.rotation = Quaternion.Euler(transform.eulerAngles.x, GetConnectionYRotation(reference), transform.rotation.eulerAngles.z);
+                target.position -= target.rotation * reference.parent.transform.localPosition;
+                break;
+            case ConnectorType.STUD_RECEPTACLE:
+                break;
+        }
     }
 }
