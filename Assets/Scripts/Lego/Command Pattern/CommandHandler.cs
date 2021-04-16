@@ -10,6 +10,8 @@ public class CommandHandler : MonoBehaviour
     public static GameObject heldBrick = null;
     private Vector3 position = new Vector3(0, 1, 0);
     private Material material = null;
+    public GameObject brickMesh;
+    
 
     // Update is called once per frame
     void Update()
@@ -28,23 +30,35 @@ public class CommandHandler : MonoBehaviour
         heldBrick = brick;
     }
 
+    public void setBrickMesh(GameObject brickMesh)
+    {
+        this.brickMesh = brickMesh;
+    }
+
     public void addBrick(Material material)
     {
-        ICommand command = new AddBrickCommand(position, material, heldBrick, brickPrefab);
+        ICommand command = new AddBrickCommand(position, material, heldBrick, brickPrefab, brickMesh);
         CommandInvoker.AddCommand(command);
     }
 
     public void changeColor(Material material)
     {
-        BrickManipulator.ChangeColor(material, heldBrick);
+        if (heldBrick != null)
+        {
+            BrickManipulator.ChangeColor(material, heldBrick);
+        }
         //ICommand command = new ChangeColorCommand(material, heldBrick);
         //CommandInvoker.AddCommand(command);
     }
 
     public void removeBrick(InteractorFacade interactor)
     {
-        interactor.Ungrab();
-        ICommand command = new RemoveBrickCommand(position, material, heldBrick, brickPrefab);
-        CommandInvoker.AddCommand(command);
+        if (heldBrick != null)
+        {
+            interactor.Ungrab();
+            material = heldBrick.GetComponentInChildren<Renderer>().sharedMaterial;
+            ICommand command = new RemoveBrickCommand(position, material, heldBrick, brickPrefab, brickMesh);
+            CommandInvoker.AddCommand(command);
+        }
     }
 }

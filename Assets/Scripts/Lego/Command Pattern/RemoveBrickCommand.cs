@@ -8,13 +8,15 @@ public class RemoveBrickCommand : ICommand
     Material material;
     GameObject brick;
     GameObject brickPrefab;
+    GameObject brickMesh;
 
-    public RemoveBrickCommand(Vector3 position, Material material, GameObject brick, GameObject brickPrefab)
+    public RemoveBrickCommand(Vector3 position, Material material, GameObject brick, GameObject brickPrefab, GameObject brickMesh)
     {
         this.position = position;
         this.material = material;
         this.brick = brick;
         this.brickPrefab = brickPrefab;
+        this.brickMesh = brickMesh;
     }
 
     public void Execute()
@@ -25,6 +27,6 @@ public class RemoveBrickCommand : ICommand
 
     public void Undo()
     {
-        brick = BrickManipulator.AddBrick(position, material, brickPrefab);
+        brick = BrickManipulator.AddBrick(position, material, brickPrefab, brickMesh);
     }
 }

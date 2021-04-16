@@ -27,9 +27,7 @@ public class CommandInvoker : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        Debug.Log("Command history length: " + commandHistory.Count);
-        
+    {   
         if(commandBuffer.Count > 0)
         {
             ICommand c = commandBuffer.Dequeue();
