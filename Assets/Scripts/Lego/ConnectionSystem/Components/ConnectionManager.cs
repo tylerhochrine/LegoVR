@@ -71,6 +71,7 @@ public class ConnectionManager : MonoBehaviour
         if (lastConnectionRequest != null)
         {
             ConnectionActionResult result = RequestProcessor.processRequest(lastConnectionRequest);
+            if (result.isSuccess()) eventNotifier.OnEvent("onSnap");
         }
     }
 

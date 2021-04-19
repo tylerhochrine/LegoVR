@@ -13,10 +13,8 @@ public static class RequestProcessor
 
         if (targetSuccess && senderSuccess)
         {
-            request.GetSender().transform.root.transform.position = request.GetTarget().GetConnectionPosition(request.GetSender());
-            request.GetSender().transform.root.transform.rotation = request.GetTarget().GetConnectionRotation(request.GetSender());
-            // request.GetSender().transform.RotateAround(, request.GetTarget().transform.up, request.GetTarget().GetConnectionYRotationDifference(request.GetSender()));
-
+            request.GetTarget().SetConnectionTransform(request.GetSender().transform, request.GetSender().GetComponentInParent<Lego>().transform);
+            request.GetSender().UpdateGroup(request.GetTarget());
             return new ConnectionActionResult(connectionData);
         }
         else if (targetSuccess) connectionData.getTargetConnectionManager().ConnectionFailure(request.GetTarget());

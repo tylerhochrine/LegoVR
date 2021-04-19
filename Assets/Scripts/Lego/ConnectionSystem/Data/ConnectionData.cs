@@ -31,8 +31,10 @@ public class ConnectionData
         // INFO: return true when unlinking is successful, false otherwise.
         // TODO: write code to be executed when two objects are disconnected
         // return !locked;
-        origin.SetConnectionData(ConnectionData.EMPTY);
-        target.SetConnectionData(ConnectionData.EMPTY);
+        target.SetConnectionData(EMPTY);
+        target.EnableCollider();
+        origin.SetConnectionData(EMPTY);
+        origin.EnableCollider();
         return true;
     }
 

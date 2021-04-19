@@ -1,19 +1,39 @@
 using System;
 using UnityEngine;
+using Tilia.Interactions.Interactables.Interactables;
+using Tilia.Interactions.Interactables.Interactors;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(EventRegisterProvider))]
 [RequireComponent(typeof(EventNotifierProvider))]
 public class Lego : MonoBehaviour
 {
+    private AudioSource snapSound;
+
+    UnityAction<InteractorFacade> OnGrabAction;
+    UnityAction<InteractorFacade> OnUngrabAction;
+
+    private InteractableFacade interactableFacade;
     private EventController eventController;
-    private bool isGrabbed;
+    private bool IsGrabbed;
 
     void Awake()
     {
-        this.eventController = new EventController();
-        this.GetComponent<EventRegisterProvider>().SetEventRegister(new EventRegister(this.eventController));
-        this.GetComponent<EventNotifierProvider>().SetEventNotifier(new EventNotifier(this.eventController));
+        snapSound = GetComponent<AudioSource>();
 
+        OnGrabAction += OnGrab;
+        OnUngrabAction += OnUngrab;
+
+        UpdateInteractableEvents();
+
+
+        eventController = new EventController();
+        GetComponent<EventRegisterProvider>().SetEventRegister(new EventRegister(eventController));
+        GetComponent<EventNotifierProvider>().SetEventNotifier(new EventNotifier(eventController));
+
+        // register snap event
+        eventController.RegisterEvent("onSnap");
+            
         // register various grab events
         eventController.RegisterEvent("onGrab");
         eventController.RegisterEvent("onUngrab");
@@ -26,32 +46,34 @@ public class Lego : MonoBehaviour
         // register preview object events
         eventController.RegisterEvent("DisplayPreviewObject");
         eventController.RegisterEvent("HidePreviewObject");
+
+        eventController.RegisterForEvent("onSnap", OnSnap);
     }
 
     void Start()
     {
-        this.isGrabbed = false;
+        this.IsGrabbed = false;
 
         // register event bridges
-        eventController.RegisterForEvent("onPotentialConnectionFound", this.DisplayPreviewObjectOnPotentialConnectionFound);
-        eventController.RegisterForEvent("onNoPotentialConnectionFound", this.HidePreviewObjectOnNoPotentialConnectionFound);
+        eventController.RegisterForEvent("onPotentialConnectionFound", DisplayPreviewObjectOnPotentialConnectionFound);
+        eventController.RegisterForEvent("onNoPotentialConnectionFound", HidePreviewObjectOnNoPotentialConnectionFound);
     }
 
     void Update()
     {
-        if (this.isGrabbed) this.eventController.OnEvent("whileGrabbed");
+        if (IsGrabbed) eventController.OnEvent("whileGrabbed");
     }
 
     // event callers // INFO: these serve as the entry point for onGrab and onUngrab events and are called by the interactor
-    public void OnGrab()
+    public void OnGrab(InteractorFacade interactorFacade)
     {
-        this.isGrabbed = true;
+        IsGrabbed = true;
         eventController.OnEvent("onGrab");
     }
 
-    public void OnUngrab()
+    public void OnUngrab(InteractorFacade interactorFacade)
     {
-        this.isGrabbed = false;
+        IsGrabbed = false;
         eventController.OnEvent("onUngrab");
     }
 
@@ -79,5 +101,28 @@ public class Lego : MonoBehaviour
     public PreviewManager GetPreviewManager()
     {
         return GetComponent<PreviewManager>();
+    }
+
+    public Transform GetGroupContainer()
+    {
+        return gameObject.transform.parent;
+    }
+
+    public void SetGroupContainer(Transform target)
+    {
+        gameObject.transform.SetParent(target);
+        UpdateInteractableEvents();
+    }
+
+    private void UpdateInteractableEvents()
+    {
+        interactableFacade = GetComponentInParent<InteractableFacade>();
+        interactableFacade.Grabbed.AddListener(OnGrabAction);
+        interactableFacade.Ungrabbed.AddListener(OnUngrabAction);
+    }
+
+    private void OnSnap()
+    {
+        snapSound.Play();
     }
 }

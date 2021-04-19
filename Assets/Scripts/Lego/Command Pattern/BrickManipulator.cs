@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using Tilia.Interactions.Interactables.Interactables;
-using Tilia.Interactions.Interactables.Interactors;
 
 public static class BrickManipulator
 {
@@ -10,15 +7,22 @@ public static class BrickManipulator
 
     public static GameObject AddBrick(Vector3 position, Material material, GameObject brick, GameObject brickMesh)
     {
-        GameObject newBrick = GameObject.Instantiate(brick, position, Quaternion.identity);
-        GameObject iBrickMesh = GameObject.Instantiate(brickMesh);
-        iBrickMesh.transform.parent = newBrick.transform.Find("MeshContainer");
-        iBrickMesh.transform.localPosition = Vector3.zero;
-        newBrick.GetComponentInChildren<Renderer>().sharedMaterial = material;
+        GameObject newBrick = Object.Instantiate(brick, position, Quaternion.identity);
+        // GameObject iBrickMesh = Object.Instantiate(brickMesh);
+        // iBrickMesh.transform.parent = newBrick.transform.Find("MeshContainer");
+        // iBrickMesh.transform.localPosition = Vector3.zero;
+        
+        // set each renderer material
+        Renderer[] renderers = newBrick.GetComponentsInChildren<Renderer>();
+        foreach(Renderer renderer in renderers)
+            renderer.sharedMaterial = material;
+       
+        // object tracker
         if(bricks == null)
         {
             bricks = new List<GameObject>();
         }
+
         bricks.Add(newBrick);
         
         return newBrick;

@@ -120,12 +120,29 @@ public class LegoConnector : MonoBehaviour
         switch (type)
         {
             case ConnectorType.STUD:
+            case ConnectorType.STUD_RECEPTACLE:
+                // FIXME: implement STUD RECEPTACLE
                 target.position = transform.position;
                 target.rotation = Quaternion.Euler(transform.eulerAngles.x, GetConnectionYRotation(reference), transform.rotation.eulerAngles.z);
                 target.position -= target.rotation * reference.parent.transform.localPosition;
                 break;
-            case ConnectorType.STUD_RECEPTACLE:
-                break;
         }
+    }
+
+    public void UpdateGroup(LegoConnector other)
+    {
+        connectionData.getSender().DisableCollider();
+        connectionData.getTarget().DisableCollider();
+        GetComponentInParent<Lego>().SetGroupContainer(other.GetComponentInParent<Lego>().GetGroupContainer());
+    }
+
+    public void DisableCollider()
+    {
+        connectorCollider.isTrigger = true;
+    }
+
+    public void EnableCollider()
+    {
+        connectorCollider.isTrigger = false;
     }
 }

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Tilia.Interactions.Interactables.Interactables;
+﻿using UnityEngine;
 using Tilia.Interactions.Interactables.Interactors;
 
 public class CommandHandler : MonoBehaviour
@@ -10,14 +7,8 @@ public class CommandHandler : MonoBehaviour
     public static GameObject heldBrick = null;
     private Vector3 position = new Vector3(0, 1, 0);
     private Material material = null;
+    [HideInInspector]
     public GameObject brickMesh;
-    
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void setMaterial(Material material)
     {
