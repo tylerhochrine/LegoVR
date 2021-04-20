@@ -21,7 +21,8 @@ public class AddBrickCommand : ICommand
 
     public void Execute()
     {
-        brick = BrickManipulator.AddBrick(position, material, brickPrefab, brickMesh);
+        //brick = BrickManipulator.AddBrick(position, material, brickPrefab, brickMesh);
+        brick = BrickManipulator.AddBrick(position, brickPrefab);
     }
 
     public void Undo()

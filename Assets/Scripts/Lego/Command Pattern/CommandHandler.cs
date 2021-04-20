@@ -1,14 +1,20 @@
 ﻿using UnityEngine;
 using Tilia.Interactions.Interactables.Interactors;
+using System.Collections;
 
 public class CommandHandler : MonoBehaviour
 {
     public GameObject brickPrefab;
     public static GameObject heldBrick = null;
-    private Vector3 position = new Vector3(0, 1, 0);
+    private Vector3 position = new Vector3(0, 3, 0);
     private Material material = null;
     [HideInInspector]
     public GameObject brickMesh;
+
+    public void Awake()
+    {
+        //position = GameObject.Find("LegoSpawnLocation").transform.position;
+    }
 
     public void setMaterial(Material material)
     {
@@ -32,6 +38,13 @@ public class CommandHandler : MonoBehaviour
         CommandInvoker.AddCommand(command);
     }
 
+    public void addBrick(GameObject prefab)
+    {
+        brickPrefab = prefab;
+        ICommand command = new AddBrickCommand(position, material, heldBrick, brickPrefab, brickMesh);
+        CommandInvoker.AddCommand(command);
+    }
+
     public void changeColor(Material material)
     {
         if (heldBrick != null)
@@ -48,8 +61,21 @@ public class CommandHandler : MonoBehaviour
         {
             interactor.Ungrab();
             material = heldBrick.GetComponentInChildren<Renderer>().sharedMaterial;
+
             ICommand command = new RemoveBrickCommand(position, material, heldBrick, brickPrefab, brickMesh);
             CommandInvoker.AddCommand(command);
+            //StartCoroutine(DestroyLater(interactor));
         }
+    }
+
+    IEnumerator DestroyLater(InteractorFacade interactor)
+    {
+        //heldBrick.SetActive(false);
+        interactor.Ungrab();
+
+        yield return new WaitForSeconds(.1f);
+        
+        ICommand command = new RemoveBrickCommand(position, material, heldBrick, brickPrefab, brickMesh);
+        CommandInvoker.AddCommand(command);
     }
 }

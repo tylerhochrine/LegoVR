@@ -28,9 +28,33 @@ public static class BrickManipulator
         return newBrick;
     }
 
+    public static GameObject AddBrick(Vector3 position, GameObject brickPrefab)
+    {
+        GameObject newBrick = GameObject.Instantiate(brickPrefab, position, Quaternion.identity);
+
+        // object tracker
+        if (bricks == null)
+        {
+            bricks = new List<GameObject>();
+        }
+
+        bricks.Add(newBrick);
+
+        return newBrick;
+    }
+
     public static void ChangeColor(Material material, GameObject brick)
     {
-        brick.GetComponentInChildren<Renderer>().sharedMaterial = material;
+        brick.transform.Find("MeshContainer").GetChild(0).name = "Lego";
+        foreach(Transform unit in brick.transform.Find("MeshContainer/Lego/LegoUnitContainer"))
+        {
+            if(unit.name == "BrickUnit")
+            {
+                unit.GetComponentInChildren<Renderer>().sharedMaterial = material;
+            }
+        }
+
+        //brick.GetComponentInChildren<Renderer>().sharedMaterial = material;
     }
 
     public static void RemoveBrick(Vector3 position, Material material)
@@ -41,7 +65,6 @@ public static class BrickManipulator
             {
                 GameObject.Destroy(bricks[i]);
                 bricks.RemoveAt(i);
-                break;
             }
         }
     }

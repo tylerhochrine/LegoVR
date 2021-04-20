@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5201649651334924185, guid: 7d114456ef7a2b94c9f429ee381ceb2a,
+        type: 3}
+      propertyPath: brickPrefab
+      value: 
+      objectReference: {fileID: 3679411647896574488}
     - target: {fileID: 2120728974867576498, guid: 7d114456ef7a2b94c9f429ee381ceb2a,
         type: 3}
       propertyPath: m_RootOrder
@@ -75,7 +80,7 @@ PrefabInstance:
     - target: {fileID: 8612833395747160486, guid: 7d114456ef7a2b94c9f429ee381ceb2a,
         type: 3}
       propertyPath: grabType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8612833395747160486, guid: 7d114456ef7a2b94c9f429ee381ceb2a,
         type: 3}
@@ -99,6 +104,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d114456ef7a2b94c9f429ee381ceb2a, type: 3}
+--- !u!1 &3679411647896574488 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3430741638334627463, guid: 7d114456ef7a2b94c9f429ee381ceb2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2059152396610495647}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &109771049283518182 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2095977034075773561, guid: 7d114456ef7a2b94c9f429ee381ceb2a,

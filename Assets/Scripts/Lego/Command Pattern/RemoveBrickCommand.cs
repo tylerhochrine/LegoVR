@@ -27,6 +27,7 @@ public class RemoveBrickCommand : ICommand
 
     public void Undo()
     {
-        brick = BrickManipulator.AddBrick(position, material, brickPrefab, brickMesh);
+        //brick = BrickManipulator.AddBrick(position, material, brickPrefab, brickMesh);
+        brick = BrickManipulator.AddBrick(position, brickPrefab);
     }
 }
